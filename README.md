@@ -1,6 +1,5 @@
-<<<<<<< HEAD
+
 # SRN_frontend
-=======
 # Frontend Environment Variables
 
 Create a `.env.local` in `frontend/` (or configure in Vercel) with:
