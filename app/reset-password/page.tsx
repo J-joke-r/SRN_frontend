@@ -35,9 +35,23 @@ export default function ResetPasswordPage() {
 
         const url = new URL(window.location.href)
 
-        // --- Case 1: token_hash in query ---
+        // --- Case 1: code parameter (Supabase password reset) ---
+        const code = url.searchParams.get('code')
+        if (code) {
+          const { error: verifyError } = await supabase.auth.verifyOtp({
+            type: 'recovery',
+            token_hash: code,
+          })
+          if (!verifyError) {
+            setReady(true)
+            return
+          }
+          setError(verifyError?.message || 'Failed to verify recovery token.')
+        }
+
+        // --- Case 2: token_hash with type parameter ---
         const type = url.searchParams.get('type')
-        const tokenHash = url.searchParams.get('token_hash') || url.searchParams.get('code')
+        const tokenHash = url.searchParams.get('token_hash')
         if (type === 'recovery' && tokenHash) {
           const { error: verifyError } = await supabase.auth.verifyOtp({
             type: 'recovery',
@@ -50,7 +64,7 @@ export default function ResetPasswordPage() {
           setError(verifyError?.message || 'Failed to verify recovery token.')
         }
 
-        // --- Case 2: access_token + refresh_token in query ---
+        // --- Case 3: access_token + refresh_token in query ---
         const accessTokenQ = url.searchParams.get('access_token')
         const refreshTokenQ = url.searchParams.get('refresh_token')
         if (accessTokenQ && refreshTokenQ) {
@@ -65,7 +79,7 @@ export default function ResetPasswordPage() {
           setError(setErrorSessionQ?.message || 'Failed to set session from query tokens.')
         }
 
-        // --- Case 3: tokens in hash fragment ---
+        // --- Case 4: tokens in hash fragment ---
         const hashParams = new URLSearchParams(window.location.hash.replace('#', ''))
         const accessToken = hashParams.get('access_token')
         const refreshToken = hashParams.get('refresh_token')
