@@ -59,7 +59,7 @@ export default function DashboardPage() {
       
       {/* Middle Left Image */}
       <Image 
-        src="/Ramanujacharya.jpg" 
+        src="/Ramanujacharya.webp" 
         alt="Spiritual figure on the left" 
         width={272}
         height={272}
@@ -68,7 +68,7 @@ export default function DashboardPage() {
       
       {/* Middle Right Image */}
       <Image 
-        src="/Jeeyar_swami.png" 
+        src="/Jeeyar_swami.webp" 
         alt="Spiritual figure on the right" 
         width={272}
         height={272}
