@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
 
 // Helper component for lock icon
@@ -86,8 +87,9 @@ export default function ResetPasswordPage() {
         if (!finalSession.session) {
           setError('Auth session missing. Please open the reset link directly from your email.')
         }
-      } catch (err: any) {
-        setError(err.message || 'Unexpected error verifying session.')
+      } catch (err: unknown) {
+        const errorMessage = err instanceof Error ? err.message : 'Unexpected error verifying session.';
+        setError(errorMessage);
       }
     }
 
@@ -127,19 +129,21 @@ export default function ResetPasswordPage() {
   animate-gradient-x bg-[length:200%_200%]">
       
       {/* Middle Left Image */}
-      <img 
+      <Image 
         src="/Ramanujacharya.jpg" 
         alt="Spiritual figure on the left" 
+        width={272}
+        height={272}
         className="hidden lg:block absolute left-10 top-1/2 -translate-y-1/2 w-68 h-auto rounded-full shadow-2xl border-4 border-white/50"
-        onError={(e) => { e.currentTarget.src = 'https://placehold.co/200x200/FFFFFF/A35151?text=Image'; e.currentTarget.onerror = null; }}
       />
       
       {/* Middle Right Image */}
-      <img 
+      <Image 
         src="/Jeeyar_swami.png" 
         alt="Spiritual figure on the right" 
+        width={272}
+        height={272}
         className="hidden lg:block absolute right-10 top-1/2 -translate-y-1/2 w-68 h-auto rounded-full shadow-2xl border-4 border-white/50"
-        onError={(e) => { e.currentTarget.src = 'https://placehold.co/200x200/FFFFFF/A35151?text=Image'; e.currentTarget.onerror = null; }}
       />
 
       {/* Content Container */}

@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react'
 import AnnouncementList from '@/components/AnnouncementList'
 import { checkRole } from '@/app/utils/api'
+import Image from 'next/image'
 
 // Button component to ensure proper rendering and clickability
 const ActionButton = ({ 
@@ -38,8 +39,7 @@ export default function AdminAnnouncementsPage() {
   const supabase = useSupabaseClient()
 
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [session, setSession] = useState<any>(null)
+  const [session, setSession] = useState<{ access_token?: string } | null>(null)
 
   useEffect(() => {
     const init = async () => {
@@ -62,7 +62,7 @@ export default function AdminAnnouncementsPage() {
     }
 
     init()
-  }, [user])
+  }, [user, router, supabase.auth])
 
   if (loading) {
     return (
@@ -73,14 +73,7 @@ export default function AdminAnnouncementsPage() {
     )
   }
 
-  if (error) {
-    return (
-      <div className="relative min-h-screen w-full flex items-center justify-center p-4 
-  bg-gradient-to-r from-rose-100 via-amber-100 to-pink-100">
-        <div className="text-red-600 text-lg font-semibold">{error}</div>
-      </div>
-    )
-  }
+
 
   return (
     <div className="relative min-h-screen w-full flex items-center justify-center p-4 
@@ -88,19 +81,21 @@ export default function AdminAnnouncementsPage() {
   animate-gradient-x bg-[length:200%_200%]">
       
       {/* Middle Left Image */}
-      <img 
+      <Image 
         src="/Ramanujacharya.jpg" 
         alt="Spiritual figure on the left" 
+        width={272}
+        height={272}
         className="hidden lg:block absolute left-10 top-1/2 -translate-y-1/2 w-68 h-auto rounded-full shadow-2xl border-4 border-white/50"
-        onError={(e) => { e.currentTarget.src = 'https://placehold.co/200x200/FFFFFF/A35151?text=Image'; e.currentTarget.onerror = null; }}
       />
       
       {/* Middle Right Image */}
-      <img 
+      <Image 
         src="/Jeeyar_swami.png" 
         alt="Spiritual figure on the right" 
+        width={272}
+        height={272}
         className="hidden lg:block absolute right-10 top-1/2 -translate-y-1/2 w-68 h-auto rounded-full shadow-2xl border-4 border-white/50"
-        onError={(e) => { e.currentTarget.src = 'https://placehold.co/200x200/FFFFFF/A35151?text=Image'; e.currentTarget.onerror = null; }}
       />
 
       {/* Content Container */}

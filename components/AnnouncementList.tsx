@@ -1,7 +1,7 @@
 // components/AnnouncementList.tsx
 
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react'
 
 interface Announcement {
@@ -51,12 +51,7 @@ export default function AnnouncementList() {
     checkAdminStatus()
   }, [user, supabase])
 
-  // Fetch announcements
-  useEffect(() => {
-    fetchAnnouncements()
-  }, [])
-
-  const fetchAnnouncements = async () => {
+  const fetchAnnouncements = useCallback(async () => {
     try {
       setLoading(true)
       const { data: { session } } = await supabase.auth.getSession()
@@ -81,7 +76,12 @@ export default function AnnouncementList() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [supabase.auth])
+
+  // Fetch announcements
+  useEffect(() => {
+    fetchAnnouncements()
+  }, [fetchAnnouncements])
 
   // Handle creating a new announcement
   const handleCreate = () => {

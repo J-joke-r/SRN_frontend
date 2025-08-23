@@ -2,7 +2,33 @@
 
 import { useState } from 'react'
 
-export default function EditUserModal({ user, onClose, onSave }: any) {
+interface EditUserModalProps {
+  user: {
+    id?: string
+    name?: string
+    father_name?: string
+    nationality?: string
+    phone_number?: string
+    date_of_birth?: string
+    caste?: string
+    gender?: string
+    gotra?: string
+    education?: string
+    occupation?: string
+    postal_address?: string
+    mother_tongue?: string
+    marital_status?: string
+    state?: string
+    district?: string
+    email?: string
+    adhaar?: string
+    role?: string
+  }
+  onClose: () => void
+  onSave: (userData: Record<string, string>) => void
+}
+
+export default function EditUserModal({ user, onClose, onSave }: EditUserModalProps) {
   const [formData, setFormData] = useState({
     id: user.id || '',
     name: user.name || '',
@@ -42,7 +68,7 @@ export default function EditUserModal({ user, onClose, onSave }: any) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name } = e.target
     const value = name === 'date_of_birth' ? maskDmyInput((e.target as HTMLInputElement).value) : e.target.value
-    setFormData((prev) => ({ ...prev, [name]: value as any }))
+    setFormData((prev) => ({ ...prev, [name]: value }))
     setErrors((prev) => ({ ...prev, [name]: '' }))
   }
 

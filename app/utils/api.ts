@@ -35,8 +35,8 @@ export async function fetchUsers(token: string) {
 }
 
 // Fetch all personal details (admin only) - default on first load
-export async function getAllPersonalDetails(token: string, params?: Record<string, any>) {
-  const queryString = params ? `?${new URLSearchParams(params).toString()}` : '';
+export async function getAllPersonalDetails(token: string, params?: Record<string, string | number | boolean>) {
+  const queryString = params ? `?${new URLSearchParams(params as Record<string, string>).toString()}` : '';
   return apiFetch(`/api/admin/personal-details${queryString}`, token);
 }
 
@@ -46,7 +46,7 @@ export async function getMyPersonalDetails(token: string) {
 }
 
 // Upsert logged-in user's personal details
-export async function savePersonalDetails(token: string, details: Record<string, any>) {
+export async function savePersonalDetails(token: string, details: Record<string, string | number | boolean | null>) {
   return apiFetch(`/api/personal-details`, token, {
     method: 'POST', // backend handles upsert
     body: JSON.stringify(details),
@@ -59,8 +59,8 @@ export async function checkRole(token: string) {
 }
 
 // Export users to CSV (admin only)
-export async function exportUsersCSV(token: string, params?: Record<string, any>) {
-  const queryString = params ? `?${new URLSearchParams(params).toString()}` : '';
+export async function exportUsersCSV(token: string, params?: Record<string, string | number | boolean>) {
+  const queryString = params ? `?${new URLSearchParams(params as Record<string, string>).toString()}` : '';
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/export-users${queryString}`,
     {

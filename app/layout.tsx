@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from './providers'
+import Image from 'next/image'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,9 +39,11 @@ export default function RootLayout({
       >
         {/* Top-center emblem across all pages */}
         <div className="fixed top-2 left-1/2 -translate-x-1/2 z-50 pointer-events-none">
-          <img
+          <Image
             src="/shankchakranama.png"
             alt="Emblem"
+            width={200}
+            height={200}
             className="w-[200px] h-auto"
           />
         </div>

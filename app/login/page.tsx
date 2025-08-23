@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 // Helper components for icons
@@ -75,8 +76,9 @@ export default function LoginPage() {
       }else{
         router.push('/dashboard');
       }
-    } catch (err: any) {
-      setError(err.message || 'Error verifying role.');
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Error verifying role.';
+      setError(errorMessage);
     }
   };
 
@@ -86,19 +88,21 @@ export default function LoginPage() {
   animate-gradient-x bg-[length:200%_200%]">
       
       {/* Middle Left Image */}
-      <img 
+      <Image 
         src="/Ramanujacharya.jpg" 
         alt="Spiritual figure on the left" 
+        width={272}
+        height={272}
         className="hidden lg:block absolute left-10 top-1/2 -translate-y-1/2 w-68 h-auto rounded-full shadow-2xl border-4 border-white/50"
-        onError={(e) => { e.currentTarget.src = 'https://placehold.co/200x200/FFFFFF/A35151?text=Image'; e.currentTarget.onerror = null; }}
       />
       
       {/* Middle Right Image */}
-      <img 
+      <Image 
         src="/Jeeyar_swami.png" 
         alt="Spiritual figure on the right" 
+        width={272}
+        height={272}
         className="hidden lg:block absolute right-10 top-1/2 -translate-y-1/2 w-68 h-auto rounded-full shadow-2xl border-4 border-white/50"
-        onError={(e) => { e.currentTarget.src = 'https://placehold.co/200x200/FFFFFF/A35151?text=Image'; e.currentTarget.onerror = null; }}
       />
 
       {/* Content Container */}

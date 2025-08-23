@@ -4,6 +4,7 @@ import { useState, useEffect, type FormEvent, type ChangeEvent } from 'react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { getMyPersonalDetails, savePersonalDetails } from '@/app/utils/api';
 
 // --- Type Definition ---
@@ -155,9 +156,10 @@ export default function PersonalDetailsPage() {
     try {
       const res = await savePersonalDetails(session.access_token, formData);
       alert(res.message || 'Details saved successfully!');
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error saving details:', err);
-      alert(err.message || 'Could not connect to the server.');
+      const errorMessage = err instanceof Error ? err.message : 'Could not connect to the server.';
+      alert(errorMessage);
     }
   };
 
@@ -175,19 +177,21 @@ export default function PersonalDetailsPage() {
   animate-gradient-x bg-[length:200%_200%]">
       
       {/* Middle Left Image */}
-      <img 
+      <Image 
         src="/Ramanujacharya.jpg" 
         alt="Spiritual figure on the left" 
+        width={272}
+        height={272}
         className="hidden lg:block absolute left-10 top-1/2 -translate-y-1/2 w-68 h-auto rounded-full shadow-2xl border-4 border-white/50"
-        onError={(e) => { e.currentTarget.src = 'https://placehold.co/200x200/FFFFFF/A35151?text=Image'; e.currentTarget.onerror = null; }}
       />
       
       {/* Middle Right Image */}
-      <img 
+      <Image 
         src="/Jeeyar_swami.png" 
         alt="Spiritual figure on the right" 
+        width={272}
+        height={272}
         className="hidden lg:block absolute right-10 top-1/2 -translate-y-1/2 w-68 h-auto rounded-full shadow-2xl border-4 border-white/50"
-        onError={(e) => { e.currentTarget.src = 'https://placehold.co/200x200/FFFFFF/A35151?text=Image'; e.currentTarget.onerror = null; }}
       />
 
       {/* Content Container */}
