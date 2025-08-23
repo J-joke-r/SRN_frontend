@@ -79,7 +79,7 @@ export default function DashboardPage() {
       <div className="relative z-10 w-full max-w-md bg-white/70 backdrop-blur-xl rounded-2xl shadow-2xl p-10">
         <div className="flex flex-col items-center">
           {/* Title */}
-          <h1 className="text-2xl font-bold text-[#6D4C41] mb-8 text-center font-serif">
+          <h1 className="text-lg font-bold text-[#6D4C41] mb-6 text-center font-serif break-words">
             Welcome, {user.email}
           </h1>
 
