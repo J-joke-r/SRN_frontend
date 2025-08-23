@@ -38,7 +38,7 @@ export default function RootLayout({
         suppressHydrationWarning={true}
       >
         {/* Top-center emblem across all pages */}
-        <div className="relative top-2 left-1/2 -translate-x-1/2 z-50 pointer-events-none">
+        <div className="relative top-2 mx-auto z-50 pointer-events-none w-fit">
           <Image
             src="/shankchakranama.webp"
             alt="Emblem"
