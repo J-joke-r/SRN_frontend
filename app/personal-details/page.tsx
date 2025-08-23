@@ -77,12 +77,7 @@ function isoToDmy(iso: string | undefined | null): string {
   return `${d.padStart(2, '0')}/${m.padStart(2, '0')}/${y}`;
 }
 
-function isValidDmy(dmy: string): boolean {
-  if (!/^\d{2}\/\d{2}\/\d{4}$/.test(dmy)) return false;
-  const [d, m, y] = dmy.split('/').map(Number);
-  const dt = new Date(y, m - 1, d);
-  return dt.getFullYear() === y && dt.getMonth() === m - 1 && dt.getDate() === d;
-}
+
 
 // --- Main Page Component ---
 export default function PersonalDetailsPage() {

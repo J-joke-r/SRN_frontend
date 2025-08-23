@@ -3,7 +3,6 @@
 import { useState, type FormEvent } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
 
 // Helper component for mail icon

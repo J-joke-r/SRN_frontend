@@ -39,7 +39,6 @@ export default function AdminAnnouncementsPage() {
   const supabase = useSupabaseClient()
 
   const [loading, setLoading] = useState(true)
-  const [session, setSession] = useState<{ access_token?: string } | null>(null)
 
   useEffect(() => {
     const init = async () => {
@@ -50,7 +49,6 @@ export default function AdminAnnouncementsPage() {
         router.push('/login')
         return
       }
-      setSession(sessionData)
 
       const roleResult = await checkRole(token)
       if (roleResult.role !== 'admin') {

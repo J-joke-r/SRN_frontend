@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react';
 import Link from 'next/link';
-import AnnouncementList from '@/components/AnnouncementList';
 import { getMyPersonalDetails } from '@/app/utils/api';
 import Image from 'next/image';
 

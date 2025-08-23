@@ -25,7 +25,26 @@ interface EditUserModalProps {
     role?: string
   }
   onClose: () => void
-  onSave: (userData: Record<string, string>) => void
+  onSave: (userData: {
+    id: string
+    name?: string
+    father_name?: string
+    nationality?: string
+    phone_number?: string
+    date_of_birth?: string
+    caste?: string
+    gender?: string
+    gotra?: string
+    education?: string
+    occupation?: string
+    postal_address?: string
+    mother_tongue?: string
+    marital_status?: string
+    state?: string
+    district?: string
+    adhaar?: string
+    email?: string
+  }) => void
 }
 
 export default function EditUserModal({ user, onClose, onSave }: EditUserModalProps) {
