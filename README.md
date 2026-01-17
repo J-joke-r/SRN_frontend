@@ -93,7 +93,7 @@ Aspiring Full Stack Developer
 
 ---
 
-## 📌 Future Enhancements
+## 📌 Future Enhancements(All completed and updated in code)
 
 - Pagination for admin tables  
 - CSV export of user data  
