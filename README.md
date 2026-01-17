@@ -59,7 +59,44 @@ This project is divided into **two separate repositories**:
 /app
   /login        - Authentication pages
   /dashboard    - User dashboard
-  /admin        - Admin dashboard
+  /admin        - Admin dashboard(Only for Admin roles)
+  /announcements - Announcements
 /components     - Reusable UI components
 /utils          - API helpers & auth utilities
 /styles         - Global styles
+
+```
+---
+
+
+## 🔐 Authentication Flow
+
+1. User logs in using Supabase Authentication  
+2. Supabase issues a JWT token  
+3. Frontend sends the JWT token to backend APIs  
+4. Backend verifies the token and user role  
+5. Secure data is returned to the frontend  
+
+---
+
+## 🔗 Related Repository
+
+- **Backend Repository:**  
+  👉 https://github.com/J-joke-r/SRN_backend
+
+---
+
+## 👨‍💻 Author
+
+**Manish Raj**  
+Aspiring Full Stack Developer  
+
+---
+
+## 📌 Future Enhancements
+
+- Pagination for admin tables  
+- CSV export of user data  
+- Advanced role management  
+- Audit logging  
+
